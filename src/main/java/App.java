@@ -1,137 +1,56 @@
-//package modules;
+
+
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static spark.Spark.*;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import spark.template.handlebars.HandlebarsTemplateEngine;
-import spark.ModelAndView;
-
 public class App {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         staticFileLocation("/public");
-
-        // the root route
         get("/", (request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-//                ArrayList<modules.Warriors> warriors = modules.Warriors.getAll();
-//                model.put("hero", warriors);
-            return new ModelAndView(model,"index.hbs");
+            ArrayList myHeroArrayList = Hero.getAll();
+            Map<String, ArrayList<Hero>> model = new HashMap<>();
+            model.put("myHero", myHeroArrayList);
+            return new ModelAndView(model, "/index.hbs");
         }, new HandlebarsTemplateEngine());
 
 
-
-        //squads route
-        get("/squad/new", (request, response) -> {
+        post("/heroes/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            return new ModelAndView(model, "squad.hbs");
+
+            String name=request.queryParams("name");
+            int age = Integer.parseInt(request.queryParams("age"));
+            String superPower=request.queryParams("superPower");
+            String weakness=request.queryParams("weakness");
+
+            Hero myHero=new Hero(name,age,superPower,weakness);
+            model.put("myHero", myHero);
+
+            return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-
-        //view squads route
-        post("/viewSquad", (request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            ArrayList<Squad> squads = request.session().attribute("squads");
-            if(squads == null){
-                squads = new ArrayList<Squad>();
-                request.session().attribute("squads", squads);
-            }
-
-            String squadName = request.queryParams("squadName");
-            int squadSize = Integer.parseInt(request.queryParams("squadSize"));
-            String cause = request.queryParams("cause");
-            Squad nextSquad = new Squad(squadName, cause, squadSize);
-            squads.add(nextSquad);
-//                model.put("squadName", squadName);
-//                model.put("cause", cause);
-            return new ModelAndView(model,"newsquads.hbs");
+        get("/heroSquad", (request, response) -> {
+            Map<String, ArrayList<Hero>> model = new HashMap<>();
+            return new ModelAndView(model, "/heroSquad.hbs");
         }, new HandlebarsTemplateEngine());
 
-
-
-        get("/squad",(request, response) -> {
+        post("/squad/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            ArrayList<Squad> squads = Squad.getAllSquad();
-            model.put("squads", squads);
-            return new ModelAndView(model, "squad.hbs");
+
+            String squadName=request.queryParams("squadName");
+            String cause=request.queryParams("cause");
+
+            Squad mySquad=new Squad(squadName,cause);
+            model.put("heroSquad", mySquad);
+
+            return new ModelAndView(model, "/squadSuccess.hbs");
         }, new HandlebarsTemplateEngine());
-
-        get("viewSquad/:id", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            Squad squad = Squad.search(Integer.parseInt(request.params(":id")));
-            model.put("squad", squad);
-            model.put("warriorOfWarriors", squad.getWarriors());
-            return new ModelAndView(model, "viewSquad.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        // the heroes form route
-        get("/heroes/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            model.put("squads", Squad.getAllSquad());
-            return new ModelAndView(model, "heroes.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        post("/viewhero", (request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            ArrayList<Warriors> warriors = request.session().attribute("warriors");
-            if(warriors == null){
-                warriors = new ArrayList<Warriors>();
-                request.session().attribute("warriors", warriors);
-            }
-
-            Squad squad = Squad.search(Integer.parseInt(request.queryParams("memberId")));
-            String hero = request.queryParams("hero");
-            int heroAge = Integer.parseInt(request.queryParams("heroAge"));
-            String power = request.queryParams("power");
-            String weakness = request.queryParams("weakness");
-            Warriors warrior = new Warriors(hero,heroAge,power,weakness,squad.getMemberId());
-            warriors.add(warrior);
-            return new ModelAndView(model, "viewhero.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/heroes",(request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            ArrayList<Warriors> warriors = Warriors.getAll();
-            model.put("warriors", warriors);
-            return new ModelAndView(model, "heroes.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        get("/heroes/:id",(request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            Warriors warriors = Warriors.searchWarrior(Integer.parseInt(request.params(":id")));
-            Squad squad = Squad.search(warriors.getMemberId());
-            model.put("warriors", warriors);
-            model.put("squad",squad);
-            return new ModelAndView(model, "heroes.hbs");
-        }, new HandlebarsTemplateEngine());
-
-
-        get("/heroes/new", (request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            model.put("squads", Squad.getAllSquad());
-            return new ModelAndView(model, "heroes.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/heroes", (request, response) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            model.put("squads", Squad.getAllSquad());
-            return new ModelAndView(model, "heroes.hbs");
-        }, new HandlebarsTemplateEngine());
-
-// ng'aleeeek
-//
-//        get("/heroes",(request, response) -> {
-//            Map<String, Object> model = new HashMap<String, Object>();
-//            ArrayList<Warriors> warriors = Warriors.getAll();
-//            model.put("warriors", warriors);
-//            return new ModelAndView(model, "heroes.hbs");
-//        }, new HandlebarsTemplateEngine());
-
     }
+
 }
