@@ -1,0 +1,24 @@
+
+
+<p><a href="/">home</a> </p>
+
+<p>Now that you have a hero let's create a squad and give them a cause</p>
+
+<form action="/squad/new" method="post">
+    <h2><p> Add new Squad </p></h2>
+    <label for="squadName"> Squad Name</label>
+    <input id="squadName" name="squadName" type="text">
+
+    <label for="cause">Cause</label>
+    <input id="cause" name="cause" type="text">
+
+    <!--    <label for="size">Size</label>-->
+    <!--    <input id="size" name="size" type="text">-->
+
+    <button type="submit" class="btn btn-default">Create Squad!</button>
+</form>
+
+{{#each mySquad}}
+    <p> Squad's Name is {{mSquadName}}</p>
+    <p> Squad's Cause is  {{mCause}}</p>
+{{/each}}
