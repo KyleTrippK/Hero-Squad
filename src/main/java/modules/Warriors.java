@@ -1,11 +1,9 @@
-
+package modules;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
-    public class Warriors {
+public class Warriors {
         private String hero;
         private int heroAge;
         private String powers;

@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package modules;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class Squad {
         }
     }
 
-    //    public void addWarriors(Warriors warriors) {
+    //    public void addWarriors(modules.Warriors warriors) {
 //        if (warriors.length()<this.getSquadSize())
 //    }
     public static ArrayList<Squad> getAllSquad() {
