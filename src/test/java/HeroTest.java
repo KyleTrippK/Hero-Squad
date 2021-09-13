@@ -9,7 +9,9 @@ public class HeroTest {
     @Before
     public void setUp() throws Exception {
     }
-
+    public void Delete(){
+        Hero.clearAllHero();
+    }
     @Test
     public void Hero_instantiatesNewClass_true() throws Exception {
         Hero hero = new Hero("shujaa", 18, "power", "weakness");
