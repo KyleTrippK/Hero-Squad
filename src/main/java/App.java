@@ -1,5 +1,7 @@
 
 
+
+
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -13,7 +15,7 @@ public class App {
 
     public static void main(String[] args) {
         staticFileLocation("/public");
-        get("/", (request, response) -> {
+        get("/", (req, res) -> {
             ArrayList myHeroArrayList = Hero.getAll();
             Map<String, ArrayList<Hero>> model = new HashMap<>();
             model.put("myHero", myHeroArrayList);
@@ -21,13 +23,13 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-        post("/heroes/new", (request, response) -> {
+        post("/heroes/new", (req, res) -> {
             Map<String, Object> model = new HashMap<String, Object>();
 
-            String name=request.queryParams("name");
-            int age = Integer.parseInt(request.queryParams("age"));
-            String superPower=request.queryParams("superPower");
-            String weakness=request.queryParams("weakness");
+            String name=req.queryParams("name");
+            int age = Integer.parseInt(req.queryParams("age"));
+            String superPower=req.queryParams("superPower");
+            String weakness=req.queryParams("weakness");
 
             Hero myHero=new Hero(name,age,superPower,weakness);
             model.put("myHero", myHero);
@@ -35,16 +37,16 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/heroSquad", (request, response) -> {
+        get("/heroSquad", (req, res) -> {
             Map<String, ArrayList<Hero>> model = new HashMap<>();
             return new ModelAndView(model, "/heroSquad.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/squad/new", (request, response) -> {
+        post("/squad/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
-            String squadName=request.queryParams("squadName");
-            String cause=request.queryParams("cause");
+            String squadName=req.queryParams("squadName");
+            String cause=req.queryParams("cause");
 
             Squad mySquad=new Squad(squadName,cause);
             model.put("heroSquad", mySquad);

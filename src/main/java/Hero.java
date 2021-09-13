@@ -9,11 +9,11 @@ public class Hero {
 
 
     public Hero(String name,int age,String superPower,String weakness){
-        mName=name;
-        mAge=age;
-        mSuperPower=superPower;
-        mWeakness=weakness;
-        mInstances.add(this);
+        this.mName=name;
+        this.mAge=age;
+        this.mSuperPower=superPower;
+        this.mWeakness=weakness;
+        this.mInstances.add(this);
     }
 
     public String getName() {
@@ -30,6 +30,10 @@ public class Hero {
 
     public String getWeakness() {
         return mWeakness;
+    }
+
+    public static void clearAllHero() {
+        mInstances.clear();
     }
 
     public static ArrayList<Hero> getAll() {
