@@ -1,0 +1,35 @@
+{{#partial "title" }}
+    Enter heroes
+{{/partial}}
+
+<!-- a from to enter heroes-->
+{{#partial "content"}}
+
+<!--    <div>-->
+<!--        <img src="/images/logo.png" alt="logo image" title="Logo Image" width="10%" class="">-->
+<!--        <p class="text-center">Heroes App</p>-->
+<!--        <p class="text-center">Heroes never Die</p>-->
+<!--    </div>-->
+    <form action='/viewhero/new' method="post">
+        <div class="form-group">
+            <label for="hero">Hero</label>
+            <input id="hero" name="hero" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="heroAge">Hero's Age</label>
+            <input id="heroAge" name="heroAge" class="form-control" type="number">
+        </div>
+        <div class="form-group">
+            <label for="powers">Hero's Powers</label>
+            <input id="powers" name="powers" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="weakness"> Hero Weakness</label>
+            <input id="weakness" name="weakness" class="form-control" type="text">
+        </div>
+        <a href="/viewSquad"><button type="submit" class="btn"> Create Hero </button></a>
+    </form>
+    <!--form.hbs.-->
+{{/partial}}
+
+{{> layout.hbs}}

@@ -1,0 +1,26 @@
+{{#partial "title"}}
+    Squads Form
+{{/partial}}
+
+{{#partial "content"}}
+    <form action="/viewSquad">
+        <div class="form-group">
+            <label for="SquadName">Squad Name</label>
+            <input id="squadName" name="squadName" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="cause">Squad cause</label>
+            <input id="cause" name="cause" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="squadSize">Maximum Members</label>
+            <input id="squadSize" name="squadSize" class="form-control" type="number">
+        </div>
+    </form>
+    <div>
+        <a href="/heroes"><button type="button" class="btn btn-primary btn-md">Create Heroes</button></a>
+        <a href="/viewSquad"><button type="button" class="btn btn-primary btn-md">View Squads</button></a>
+    </div>
+{{/partial}}
+
+{{> layout.hbs}}
