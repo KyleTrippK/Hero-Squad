@@ -1,16 +1,36 @@
 
-{{#partial "title"}}
-    Home
-{{/partial}}
+
 
 {{#partial "content"}}
+    <h1>Everyone needs a Hero</h1>
+    <p>Here we help you create one.</p>
+    <p>Come on!!Your Hero is a click away</p>
 
-    <div class="text-center">
-        <a href="squad"><button type="button" id="squads" name="squads" class="btn btn-primary btn-lg">SQUADS</button></a>
-<!--        <button type="button" id="heroes" name="heroes" class="btn btn-secondary btn-lg">HEROES</button>-->
-        <p>Hello guys!!</p>
-    </div>
+    <form action="/heroes/new" method="post">
+        <h2><p> Add new Hero </p></h2>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text">
 
+        <label for="age">Age</label>
+        <input id="age" name="age" type="text">
+
+        <label for="superPower">Super Power</label>
+        <input id="superPower" name="superPower" type="text">
+
+        <label for="weakness">Weakness</label>
+        <input id="weakness" name="weakness" type="text">
+
+
+        <button type="submit" class="btn btn-default">Create Hero!</button>
+    </form>
+    {{#each myHero}}
+        <p>Your Hero's Name is {{name}}</p>
+        <p>Your Hero's Age is {{age}}</p>
+        <p>Your Hero's Super power is {{superPower}}</p>
+        <p>Your Hero's Weakness is {{weakness}}</p>
+
+    {{/each }}
+    <p>Click <a href="/heroSquad">here</a> to view squads </p>
 {{/partial}}
 
 {{> layout.hbs}}
