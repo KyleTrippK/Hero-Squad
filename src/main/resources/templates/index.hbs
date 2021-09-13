@@ -2,35 +2,39 @@
 
 
 {{#partial "content"}}
-    <h1>Everyone needs a Hero</h1>
-    <p>Here we help you create one.</p>
-    <p>Come on!!Your Hero is a click away</p>
+        <form action="/heroes/new" method="post">
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name:" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Heroes Age: " required>
+            </div>
+            <div class="form-group">
+                <label for="superpower">Super Power:</label>
+                <input type="text" class="form-control" id="superpower" name="power" placeholder="Enter Superpower" required>
+            </div>
+            <div class="form-group">
+                <label for="weakness">Weakness</label>
+                <input type="text" class="form-control" id="weakness" name="weakness" placeholder="Enter Weakness" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default">Create Hero!</button>
+                <p>Click <a href="/heroSquad">here</a> to view squads </p>
 
-    <form action="/heroes/new" method="post">
-        <h2><p> Add new Hero </p></h2>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text">
-
-        <label for="age">Age</label>
-        <input id="age" name="age" type="text">
-
-        <label for="superPower">Super Power</label>
-        <input id="superPower" name="superPower" type="text">
-
-        <label for="weakness">Weakness</label>
-        <input id="weakness" name="weakness" type="text">
-
-
-        <button type="submit" class="btn btn-default">Create Hero!</button>
-    </form>
+            </div>
+        </form>
+<hr>
     {{#each myHero}}
-        <p>Your Hero's Name is {{name}}</p>
-        <p>Your Hero's Age is {{age}}</p>
-        <p>Your Hero's Super power is {{superPower}}</p>
-        <p>Your Hero's Weakness is {{weakness}}</p>
-
+        <div class="container">
+            <h5>Hero Details:</h5>
+            <p>Name :{{name}}</p>
+            <p>Age :{{age}}</p>
+            <p>Super-power :{{superpower}}</p>
+            <p>Weakness :{{weakness}}</p>
+        </div>
     {{/each }}
-    <p>Click <a href="/heroSquad">here</a> to view squads </p>
 {{/partial}}
 
 {{> layout.hbs}}
