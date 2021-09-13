@@ -16,7 +16,7 @@ Clone this repository to your local repository.
 ---
 ## **Prerequisites**
 
-You need the following softwares installed:
+You need the following software installed:
 - java
 - JDK - Java Development Kit
 - Maven
@@ -52,4 +52,4 @@ Contacts:.
 * KyletrippK@gmail.com
 * 0728 838 078---
 ## License
-Check licensing information here (./license)
+Read licensing information [here](licence).
