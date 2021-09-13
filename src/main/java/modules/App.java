@@ -1,3 +1,4 @@
+package modules;
 
 import static spark.Spark.*;
 
@@ -16,7 +17,7 @@ public class App {
             // the root route
             get("/", (request, response) -> {
                 Map<String, Object> model = new HashMap<String, Object>();
-//                ArrayList<Warriors> warriors = Warriors.getAll();
+//                ArrayList<modules.Warriors> warriors = modules.Warriors.getAll();
 //                model.put("hero", warriors);
                 return new ModelAndView(model,"index.hbs");
             }, new HandlebarsTemplateEngine());
@@ -31,7 +32,7 @@ public class App {
             //view heroes route
 //            post("/viewhero/new", (request, response) -> {
 //                Map<String,Object> model = new HashMap<String, Object>();
-//                ArrayList<Warriors> warriors =request.session().attribute("warriors");
+//                ArrayList<modules.Warriors> warriors =request.session().attribute("warriors");
 //                String hero = request.queryParams("hero");
 //                request.session().attribute("hero", hero);
 //                model.put("hero", hero);
